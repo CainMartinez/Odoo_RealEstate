@@ -9,14 +9,16 @@
                   decoration-danger="state == 'canceled'" 
                   decoration-info="state == 'offer_accepted'"
                   decoration-warning="state == 'offer_received'">
-                <field name="name" string="Property"/>
-                <field name="postcode" string="Postcode"/>
-                <field name="bedrooms" string="Beds"/>
-                <field name="living_area" string="Area (m²)"/>
-                <field name="expected_price" string="Expected Price"/>
-                <field name="selling_price" string="Selling Price"/>
-                <field name="date_availability" string="Available"/>
-                <field name="state" string="Status" widget="badge"/>
+                <field name="name" string="Title"/>
+                <field name="property_type_id" string="Type" optional="show"/>
+                <field name="postcode" optional="hide"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="bedrooms" optional="show"/>
+                <field name="living_area" string="Area" optional="show"/>
+                <field name="expected_price" string="Expected" optional="show"/>
+                <field name="selling_price" string="Selling" optional="show"/>
+                <field name="date_availability" string="Available" optional="hide"/>
+                <field name="state" widget="badge"/>
             </list>
         </field>
     </record>
@@ -35,9 +37,11 @@
                         <h1>
                             <field name="name" placeholder="Property Name..." class="o_text_overflow"/>
                         </h1>
+                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': False}" placeholder="Add tags..."/>
                     </div>
                     <group>
                         <group string="Location &amp; Availability">
+                            <field name="property_type_id" options="{'no_create': True}"/>
                             <field name="postcode"/>
                             <field name="date_availability" string="Available From"/>
                             <field name="active" widget="boolean_toggle"/>
@@ -64,6 +68,22 @@
                                 </group>
                             </group>
                         </page>
+                        <page string="Offers" name="offers">
+                            <field name="offer_ids">
+                                <list string="Property Offers" editable="bottom">
+                                    <field name="price"/>
+                                    <field name="partner_id"/>
+                                    <field name="status"/>
+                                    <!-- <field name="property_id" column_invisible="1"/> -->
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Other Info" name="other_info">
+                            <group>
+                                <field name="seller_id"/>
+                                <field name="buyer_id"/>
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
             </form>
@@ -82,10 +102,12 @@
                 <field name="bedrooms"/>
                 <field name="living_area"/>
                 <field name="facades"/>
+                <field name="property_type_id"/>
                 <separator/>
                 <filter string="Available" name="available" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer_received')]"/>
                 <separator/>
                 <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <filter string="Property Type" name="property_type" context="{'group_by': 'property_type_id'}"/>
                 <filter string="Postcode" name="postcode" context="{'group_by': 'postcode'}"/>
             </search>
         </field>

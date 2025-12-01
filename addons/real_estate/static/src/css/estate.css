@@ -1,342 +1,190 @@
 /* ====================================================================
-   REAL ESTATE MODULE - PROFESSIONAL IMMERSIVE DESIGN
-   Corporate Identity: Luxury Real Estate
-   Color Palette: Deep Navy, Gold Accent, Soft Grays
+   REAL ESTATE MODULE - CLEAN DESIGN
+   Corporate Identity: Odoo Style
    ==================================================================== */
 
 :root {
-    --estate-primary: #1a2332;        /* Deep Navy */
-    --estate-secondary: #d4af37;      /* Elegant Gold */
-    --estate-accent: #2c3e50;         /* Slate Blue */
-    --estate-success: #27ae60;        /* Property Green */
-    --estate-danger: #e74c3c;         /* Alert Red */
-    --estate-light: #ecf0f1;          /* Soft Gray */
-    --estate-dark: #0d1117;           /* Almost Black */
-    --estate-gradient: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+    --estate-primary: #875A7B;        /* Odoo Top Bar Purple */
+    --estate-secondary: #9d6d91;      /* Lighter Purple */
+    --estate-success: #28a745;        /* Success Green */
+    --estate-danger: #dc3545;         /* Danger Red */
+    --estate-warning: #ffc107;        /* Warning Yellow */
+    --estate-info: #17a2b8;           /* Info Blue */
+    --estate-light: #f8f9fa;          /* Light Gray */
+    --estate-border: #dee2e6;         /* Border Gray */
 }
 
 /* ========================================
-   LIST VIEW - Modern Data Grid
+   LIST VIEW - Enhanced Table
    ======================================== */
 
 .o_list_view .o_list_table {
-    font-size: 0.95rem;
-    table-layout: auto;
-    width: 100%;
-    box-shadow: 0 2px 12px rgba(26, 35, 50, 0.08);
     border-radius: 8px;
     overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.o_list_view .o_list_table thead {
+    background: linear-gradient(135deg, var(--estate-primary), var(--estate-secondary));
 }
 
 .o_list_view .o_list_table thead th {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    font-weight: 700;
-    color: var(--estate-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 0.85rem;
-    border-bottom: 3px solid var(--estate-secondary);
-    white-space: nowrap;
-    padding: 1rem 0.75rem;
-    position: relative;
-    box-shadow: inset 0 -2px 4px rgba(0,0,0,0.05);
+    font-weight: 600;
+    color: white !important;
+    font-size: 0.8rem;
+    padding: 0.75rem 0.5rem;
+    border-bottom: 2px solid var(--estate-secondary);
 }
 
-.o_list_view .o_list_table thead th::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: var(--estate-secondary);
-    transition: width 0.3s ease;
-}
-
-.o_list_view .o_list_table thead th:hover::after {
-    width: 100%;
+.o_list_view .o_list_table thead th span {
+    color: white !important;
 }
 
 .o_list_view .o_list_table tbody td {
-    padding: 1rem 0.75rem;
-    white-space: nowrap;
-    border-bottom: 1px solid rgba(26, 35, 50, 0.06);
-    transition: all 0.2s ease;
-}
-
-.o_list_view .o_list_table .o_data_row {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0.875rem 0.5rem;
+    border-bottom: 1px solid var(--estate-border);
+    vertical-align: middle;
+    font-size: 0.9rem;
 }
 
 .o_list_view .o_list_table .o_data_row:hover {
-    background: linear-gradient(90deg, rgba(212, 175, 55, 0.08) 0%, rgba(26, 35, 50, 0.04) 100%) !important;
-    transform: translateX(4px);
-    box-shadow: -4px 0 0 0 var(--estate-secondary);
+    background-color: rgba(113, 75, 103, 0.08) !important;
+    box-shadow: 0 2px 4px rgba(113, 75, 103, 0.1);
 }
 
 .o_list_view .o_list_table .o_data_row:nth-child(even) {
-    background-color: rgba(236, 240, 241, 0.3);
+    background-color: rgba(248, 249, 250, 0.5);
 }
 
-/* Property name column - Premium Typography */
-.o_list_table th[data-name="name"],
+/* Property name column */
 .o_list_table td[name="name"] {
-    min-width: 250px;
-    width: auto;
-    max-width: 400px;
-    white-space: normal;
     font-weight: 600;
     color: var(--estate-primary);
-    font-size: 1rem;
 }
 
-.o_list_table td[name="name"] a {
-    color: var(--estate-primary);
-    text-decoration: none;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-.o_list_table td[name="name"] a::before {
-    content: '🏠';
-    margin-right: 8px;
-    font-size: 1.1rem;
-}
-
-.o_list_table td[name="name"] a:hover {
-    color: var(--estate-secondary);
+/* Type column */
+.o_list_table td[name="property_type_id"] {
+    font-weight: 500;
 }
 
 /* Postcode column */
-.o_list_table th[data-name="postcode"],
-.o_list_table td[name="postcode"] {
-    width: 100px;
+.o_list_table td[name="postcode"],
+.o_list_table th[data-name="postcode"] {
     text-align: center;
+    width: 80px !important;
+    max-width: 80px !important;
 }
 
 /* Numeric columns */
-.o_list_table th[data-name="bedrooms"],
 .o_list_table td[name="bedrooms"],
-.o_list_table th[data-name="living_area"],
 .o_list_table td[name="living_area"] {
-    width: 80px;
     text-align: center;
 }
 
-/* Price columns - Luxury Financial Display */
-.o_list_table th[data-name="expected_price"],
+/* Price columns */
 .o_list_table td[name="expected_price"],
-.o_list_table th[data-name="selling_price"],
 .o_list_table td[name="selling_price"] {
-    width: 140px;
-    text-align: right;
     font-weight: 700;
-    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
-    font-size: 1.05rem;
-}
-
-.o_list_table td[name="expected_price"] {
-    color: var(--estate-accent);
-    position: relative;
-    padding-right: 1.5rem;
-}
-
-.o_list_table td[name="expected_price"]::before {
-    content: '💰';
-    position: absolute;
-    left: 0.5rem;
-    font-size: 0.9rem;
-    opacity: 0.6;
+    text-align: right;
 }
 
 .o_list_table td[name="selling_price"] {
     color: var(--estate-success);
-    font-weight: 800;
-    background: linear-gradient(90deg, transparent, rgba(39, 174, 96, 0.08));
-    padding-right: 1.5rem;
-}
-
-.o_list_table td[name="selling_price"]::after {
-    content: '✓';
-    position: absolute;
-    right: 0.5rem;
-    color: var(--estate-success);
-    font-weight: bold;
 }
 
 /* Date column */
-.o_list_table th[data-name="date_availability"],
 .o_list_table td[name="date_availability"] {
-    width: 120px;
     text-align: center;
 }
 
-/* Status column - Premium Badges */
-.o_list_table th[data-name="state"],
+/* Status column */
 .o_list_table td[name="state"] {
-    width: 140px;
     text-align: center;
 }
 
-.o_list_table td[name="state"] .badge {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: 600;
+/* State badges */
+.o_list_table .badge {
+    font-weight: 700;
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 0.75rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    border: 2px solid currentColor;
+    letter-spacing: 0.3px;
 }
 
 /* ========================================
-   FORM VIEW - Immersive Property Details
+   FORM VIEW - Enhanced Property Details
    ======================================== */
 
-/* Premium Status Bar */
+/* Status Bar */
 .o_form_view .o_form_statusbar {
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    border-bottom: 4px solid var(--estate-secondary);
-    box-shadow: 0 2px 12px rgba(26, 35, 50, 0.1);
-    padding: 0.75rem 2rem;
+    background: var(--estate-light);
+    border-bottom: 3px solid var(--estate-primary);
+    padding: 0.75rem 1.5rem;
 }
 
-.o_form_view .o_statusbar_status .o_arrow_button {
-    padding: 0.75rem 2rem;
+.o_form_statusbar .o_arrow_button {
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
     font-size: 0.8rem;
-    background: #ffffff;
-    color: var(--estate-accent);
-    border: 2px solid rgba(26, 35, 50, 0.2);
-    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
 }
 
-.o_form_view .o_statusbar_status .o_arrow_button:hover {
-    background: var(--estate-light);
-    border-color: var(--estate-secondary);
-    color: var(--estate-primary);
-    transform: translateY(-2px);
-    box-shadow: 0 2px 8px rgba(26, 35, 50, 0.1);
+.o_form_statusbar .o_arrow_button.btn-primary {
+    background-color: var(--estate-primary);
+    border-color: var(--estate-primary);
+    color: white;
 }
 
-.o_form_view .o_statusbar_status .o_arrow_button.btn-primary,
-.o_form_view .o_statusbar_status .o_arrow_button.disabled {
-    background: var(--estate-secondary);
-    border-color: var(--estate-secondary);
-    color: var(--estate-dark);
-    font-weight: 700;
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
-}
-
-/* Property Title - Hero Typography */
+/* Title */
 .o_form_view .oe_title {
-    position: relative;
-    padding: 2rem 0;
-    border-bottom: 3px solid var(--estate-light);
     margin-bottom: 2rem;
-}
-
-.o_form_view .oe_title::before {
-    content: '🏠';
-    position: absolute;
-    left: -3rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 3rem;
-    opacity: 0.1;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--estate-border);
 }
 
 .o_form_view .oe_title h1 {
-    margin-bottom: 0;
-}
-
-.o_form_view .oe_title h1 input {
-    font-size: 2.5rem;
-    font-weight: 700;
     color: var(--estate-primary);
-    border: none;
-    border-bottom: 3px solid transparent;
-    padding: 0.5rem 0;
-    background: linear-gradient(to right, var(--estate-primary), var(--estate-accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    transition: all 0.3s ease;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 
-.o_form_view .oe_title h1 input:focus {
-    border-bottom-color: var(--estate-secondary);
-    outline: none;
-    -webkit-text-fill-color: var(--estate-primary);
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
-}
-
-/* Premium Group Cards */
+/* Groups */
 .o_form_view .o_group {
-    margin-bottom: 2rem;
-    background: linear-gradient(135deg, rgba(236, 240, 241, 0.4), rgba(255, 255, 255, 0.8));
-    border-radius: 12px;
+    background: white;
     padding: 1.5rem;
-    box-shadow: 0 4px 16px rgba(26, 35, 50, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin-bottom: 1.5rem;
     border-left: 4px solid var(--estate-secondary);
-    transition: all 0.3s ease;
 }
 
-.o_form_view .o_group:hover {
-    box-shadow: 0 8px 24px rgba(26, 35, 50, 0.12);
-    transform: translateY(-2px);
-}
-
+/* Group Headers */
 .o_form_view .o_horizontal_separator {
-    font-size: 0.9rem;
     font-weight: 700;
     color: var(--estate-primary);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin: 2rem 0 1.5rem 0;
-    padding: 0.75rem 1rem;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(236, 240, 241, 0.8));
-    color: var(--estate-primary);
-    border-radius: 8px;
-    border-left: 4px solid var(--estate-secondary);
-    position: relative;
-    box-shadow: 0 2px 8px rgba(26, 35, 50, 0.08);
+    letter-spacing: 0.8px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--estate-secondary);
 }
 
-.o_form_view .o_horizontal_separator::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background: var(--estate-secondary);
-    border-radius: 2px;
-}
-
-/* Elegant Field Labels */
+/* Field Labels */
 .o_form_view .o_form_label {
     font-weight: 600;
-    color: var(--estate-accent);
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 0.5rem;
+    color: #495057;
+    font-size: 0.875rem;
 }
 
-/* Luxury Input Fields */
+/* Input Fields */
 .o_form_view input.o_field_widget,
 .o_form_view select.o_field_widget,
 .o_form_view textarea.o_field_widget {
-    border: 2px solid rgba(26, 35, 50, 0.15);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    background: #ffffff;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 4px rgba(26, 35, 50, 0.04);
+    border: 2px solid var(--estate-border);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
 }
 
 .o_form_view input.o_field_widget:focus,
@@ -344,373 +192,131 @@
 .o_form_view textarea.o_field_widget:focus {
     border-color: var(--estate-secondary);
     outline: none;
-    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15), 0 4px 12px rgba(26, 35, 50, 0.08);
-    transform: translateY(-1px);
+    box-shadow: 0 0 0 3px rgba(135, 90, 123, 0.15);
 }
 
-/* Price Fields - Special Treatment */
-.o_form_view .o_field_widget[name="expected_price"] input,
-.o_form_view .o_field_widget[name="selling_price"] input {
-    font-size: 1.5rem;
+/* Price Fields */
+.o_form_view input[name="expected_price"],
+.o_form_view input[name="selling_price"] {
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--estate-primary);
-    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
-    background: linear-gradient(135deg, #ffffff, rgba(212, 175, 55, 0.05));
-    border-color: var(--estate-secondary);
-}
-/* Premium Notebook Tabs */
-.o_form_view .o_notebook {
-    margin-top: 3rem;
-    position: relative;
 }
 
-.o_form_view .o_notebook::before {
-    content: '';
-    position: absolute;
-    top: -2rem;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--estate-secondary), transparent);
+/* Notebook Tabs */
+.o_form_view .o_notebook {
+    margin-top: 2rem;
 }
 
 .o_form_view .o_notebook .nav-tabs {
-    border: none;
-    background: #f8f9fa;
-    border-radius: 12px 12px 0 0;
-    padding: 0.75rem;
-    box-shadow: 0 2px 8px rgba(26, 35, 50, 0.05);
-    border-bottom: 2px solid var(--estate-light);
+    border-bottom: 2px solid var(--estate-border);
+    margin-bottom: 1.5rem;
 }
 
 .o_form_view .o_notebook .nav-link {
-    color: var(--estate-accent);
     font-weight: 600;
-    padding: 1rem 2rem;
+    color: #6c757d;
+    padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 8px;
-    margin: 0 0.25rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
+    border-bottom: 3px solid transparent;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
     font-size: 0.85rem;
-}
-
-.o_form_view .o_notebook .nav-link::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 3px;
-    background: var(--estate-secondary);
-    transition: width 0.3s ease;
-    border-radius: 3px 3px 0 0;
+    letter-spacing: 0.5px;
+    margin-bottom: -2px;
 }
 
 .o_form_view .o_notebook .nav-link:hover {
     color: var(--estate-primary);
-    background: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-}
-
-.o_form_view .o_notebook .nav-link:hover::before {
-    width: 40%;
+    border-bottom-color: var(--estate-secondary);
 }
 
 .o_form_view .o_notebook .nav-link.active {
     color: var(--estate-primary);
-    background: linear-gradient(135deg, #ffffff, rgba(212, 175, 55, 0.15));
-    border: 2px solid var(--estate-secondary);
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
-    transform: translateY(-4px);
-}
-
-.o_form_view .o_notebook .nav-link.active::before {
-    width: 100%;
-    background: var(--estate-secondary);
+    background: transparent;
+    border-bottom-color: var(--estate-primary);
+    font-weight: 700;
 }
 
 .o_form_view .o_notebook .tab-content {
-    padding: 2rem;
-    background: #ffffff;
-    border-radius: 0 0 12px 12px;
-    box-shadow: 0 4px 16px rgba(26, 35, 50, 0.08);
-    min-height: 300px;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-/* Description field */
-.o_form_view .o_field_widget[name="description"] textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-/* Boolean toggle styling */
-.o_form_view .o_field_boolean_toggle {
-    display: inline-flex;
-    align-items: center;
-}
-
-.o_form_view .o_field_boolean_toggle input[type="checkbox"] {
-    width: 2.5rem;
-    height: 1.25rem;
-    cursor: pointer;
-}
-
-/* Group separators in notebook */
-.o_form_view .o_notebook .o_group .o_horizontal_separator {
-    font-size: 0.875rem;
+/* Many2many tags */
+.o_field_many2many_tags .badge {
+    background-color: var(--estate-secondary);
+    color: white;
     font-weight: 600;
-    color: #6c757d;
-    margin: 1rem 0 0.75rem 0;
-    padding-bottom: 0.25rem;
-    border-bottom: 1px solid #dee2e6;
-}
-
-/* Readonly fields styling */
-.o_form_view .o_field_widget.o_readonly {
-    color: #6c757d;
-}
-
-/* Better spacing for form groups */
-.o_form_view .o_group .o_wrap_field {
-    margin-bottom: 0.5rem;
-}* Icon enhancements for boolean fields */
-.o_field_widget[name="garage"]::before,
-.o_field_widget[name="garden"]::before {
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    margin-right: 0.5rem;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .o_form_view .o_form_sheet {
-        padding: 1rem;
-    }
-    
-    .o_form_view .o_form_sheet h1 {
-        font-size: 1.5rem;
-    }
+    padding: 0.4rem 0.8rem;
+    margin: 0.2rem;
+    border-radius: 12px;
 }
 
 /* ========================================
-   SEARCH VIEW - Executive Search Bar
+   SEARCH VIEW
    ======================================== */
 
 .o_searchview {
-    background: linear-gradient(135deg, #f8f9fa, #ffffff);
-    border-radius: 12px;
-    padding: 1rem;
-    border: 2px solid rgba(212, 175, 55, 0.3);
-    box-shadow: 0 4px 20px rgba(26, 35, 50, 0.08);
-}
-
-.o_searchview .o_searchview_input_container {
-    border-radius: 50px;
-    border: 2px solid rgba(26, 35, 50, 0.15);
-    background: #ffffff;
-    transition: all 0.3s ease;
-    padding: 0.75rem 1.5rem;
-    box-shadow: 0 2px 8px rgba(26, 35, 50, 0.05);
-}
-
-.o_searchview .o_searchview_input_container:focus-within {
-    border-color: var(--estate-secondary);
-    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.3), 0 8px 24px rgba(26, 35, 50, 0.2);
-    transform: translateY(-2px);
-}
-
-.o_searchview .o_searchview_input {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--estate-primary);
-}
-
-.o_searchview .o_searchview_input::placeholder {
-    color: rgba(26, 35, 50, 0.5);
-    font-style: italic;
+    background: white;
+    border-radius: 8px;
+    padding: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .o_searchview .o_searchview_facet {
     background: var(--estate-secondary);
-    color: var(--estate-dark);
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
+    color: white;
+    border-radius: 16px;
     font-weight: 600;
-    border: 2px solid var(--estate-dark);
-    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
-    margin: 0.25rem;
-}
-
-.o_searchview .o_searchview_facet .o_facet_remove {
-    color: var(--estate-dark);
-    font-weight: bold;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
-}
-
-.o_searchview .o_searchview_facet .o_facet_remove:hover {
-    opacity: 1;
-}
-
-/* Filter Dropdown - Premium Menu */
-.o_filters_menu .dropdown-menu {
-    border-radius: 12px;
-    border: 2px solid var(--estate-secondary);
-    box-shadow: 0 8px 32px rgba(26, 35, 50, 0.2);
-    padding: 1rem;
-    background: #ffffff;
-}
-
-.o_filters_menu .dropdown-item {
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    margin: 0.25rem 0;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.o_filters_menu .dropdown-item:hover {
-    background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
-    color: var(--estate-primary);
-    transform: translateX(4px);
-    border-left: 3px solid var(--estate-secondary);
+    padding: 0.4rem 0.8rem;
 }
 
 /* ========================================
-   BUTTONS & ACTIONS - Executive Controls
+   BUTTONS & ACTIONS
    ======================================== */
 
-.o_form_view .oe_button_box {
-    margin-bottom: 2rem;
-    gap: 1rem;
+.btn-primary {
+    background-color: var(--estate-primary) !important;
+    border-color: var(--estate-primary) !important;
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
 }
 
-.o_form_view .oe_stat_button {
-    background: linear-gradient(135deg, rgba(236, 240, 241, 0.6), #ffffff);
-    border: 2px solid rgba(26, 35, 50, 0.15);
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(26, 35, 50, 0.08);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.btn-primary:hover {
+    background-color: var(--estate-secondary) !important;
+    border-color: var(--estate-secondary) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(113, 75, 103, 0.2);
 }
 
-.o_form_view .oe_stat_button:hover {
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), #ffffff);
-    border-color: var(--estate-secondary);
-    color: var(--estate-primary);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+.btn-secondary {
+    border-radius: 6px;
+    font-weight: 600;
 }
 
-/* Primary Action Buttons */
+/* Action buttons in form */
 .o_form_button_create,
 .o_form_button_edit,
 .o_form_button_save {
-    background: var(--estate-secondary) !important;
-    color: var(--estate-dark) !important;
-    border: 2px solid var(--estate-dark) !important;
-    border-radius: 8px !important;
-    padding: 0.75rem 2rem !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4) !important;
-}
-
-.o_form_button_create:hover,
-.o_form_button_edit:hover,
-.o_form_button_save:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6) !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* ========================================
-   PREMIUM ANIMATIONS & EFFECTS
+   KANBAN & CARDS
    ======================================== */
 
-@keyframes shimmer {
-    0% { background-position: -1000px 0; }
-    100% { background-position: 1000px 0; }
+.o_kanban_record {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid var(--estate-secondary);
 }
 
-.o_list_view .o_list_table::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-        transparent, 
-        rgba(212, 175, 55, 0.1), 
-        transparent
-    );
-    animation: shimmer 3s infinite;
-    pointer-events: none;
-}
-
-/* Luxury Loading State */
-.o_loading {
-    position: relative;
-}
-
-.o_loading::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    border: 4px solid var(--estate-light);
-    border-top-color: var(--estate-secondary);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* ========================================
-   RESPONSIVE LUXURY DESIGN
-   ======================================== */
-
-@media (max-width: 768px) {
-    .o_form_view .oe_title h1 input {
-        font-size: 1.75rem;
-    }
-    
-    .o_form_view .o_field_widget[name="expected_price"] input,
-    .o_form_view .o_field_widget[name="selling_price"] input {
-        font-size: 1.25rem;
-    }
-    
-    .o_list_view .o_list_table thead th {
-        padding: 0.75rem 0.5rem;
-        font-size: 0.75rem;
-    }
-    
-    .o_form_view .o_notebook .nav-link {
-        padding: 0.75rem 1rem;
-        font-size: 0.75rem;
-    }
-}
-
-/* ========================================
-   ACCESSIBILITY & FOCUS STATES
-   ======================================== */
-
-*:focus-visible {
-    outline: 3px solid var(--estate-secondary);
-    outline-offset: 2px;
-}
-
-.o_form_view button:focus-visible,
-.o_list_view button:focus-visible {
-    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.3);
+.o_kanban_record:hover {
+    box-shadow: 0 4px 12px rgba(113, 75, 103, 0.15);
+    transform: translateY(-2px);
 }
