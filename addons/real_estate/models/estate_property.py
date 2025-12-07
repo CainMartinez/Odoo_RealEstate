@@ -2,12 +2,19 @@
 
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools import float_compare, float_is_zero
 
 
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real Estate Property"
+
+    # SQL constraints
+    _sql_constraints = [
+        ('check_expected_price', 'CHECK(expected_price > 0)', 'The expected price must be strictly positive.'),
+        ('check_selling_price', 'CHECK(selling_price >= 0)', 'The selling price must be positive.'),
+    ]
 
     # Basic fields
     name = fields.Char(string="Title", required=True)
@@ -96,6 +103,27 @@ class EstateProperty(models.Model):
         """Mark the property as sold"""
         for record in self:
             if record.state == 'canceled':
-                raise UserError("Cancelled properties cannot be sold.")
+                raise UserError("Canceled properties cannot be sold.")
             record.state = 'sold'
         return True
+
+    @api.constrains('expected_price')
+    def _check_expected_price(self):
+        """Validate that expected price is strictly positive"""
+        for record in self:
+            if float_compare(record.expected_price, 0, precision_digits=2) <= 0:
+                raise ValidationError("The expected price must be strictly positive.")
+
+    @api.constrains('selling_price', 'expected_price')
+    def _check_selling_price(self):
+        """Validate that selling price is at least 90% of expected price"""
+        for record in self:
+            # Only check if selling_price is set (i.e., property has been sold)
+            if not float_is_zero(record.selling_price, precision_digits=2):
+                min_price = record.expected_price * 0.9
+                if float_compare(record.selling_price, min_price, precision_digits=2) < 0:
+                    raise ValidationError(
+                        "The selling price cannot be lower than 90%% of the expected price. "
+                        "Expected: %.2f, Minimum allowed: %.2f, Got: %.2f" % 
+                        (record.expected_price, min_price, record.selling_price)
+                    )
