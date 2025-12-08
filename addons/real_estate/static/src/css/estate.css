@@ -254,24 +254,6 @@
     border-radius: 12px;
 }
 
-/* ========================================
-   SEARCH VIEW
-   ======================================== */
-
-.o_searchview {
-    background: white;
-    border-radius: 8px;
-    padding: 0.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.o_searchview .o_searchview_facet {
-    background: var(--estate-secondary);
-    color: white;
-    border-radius: 16px;
-    font-weight: 600;
-    padding: 0.4rem 0.8rem;
-}
 
 /* ========================================
    BUTTONS & ACTIONS
