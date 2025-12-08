@@ -5,10 +5,10 @@
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list string="Properties" decoration-success="state == 'sold'" 
-                  decoration-danger="state == 'canceled'" 
-                  decoration-info="state == 'offer_accepted'"
-                  decoration-warning="state == 'offer_received'">
+            <list string="Properties" 
+                  decoration-success="state == 'offer_received'"
+                  decoration-bf="state == 'offer_accepted'"
+                  decoration-muted="state == 'sold'">
                 <field name="name" string="Title"/>
                 <field name="property_type_id" string="Type" optional="show"/>
                 <field name="postcode" optional="hide"/>
@@ -18,7 +18,7 @@
                 <field name="expected_price" string="Expected" optional="show"/>
                 <field name="selling_price" string="Selling" optional="show"/>
                 <field name="date_availability" string="Available" optional="hide"/>
-                <field name="state" widget="badge"/>
+                <field name="state" invisible="1"/>
             </list>
         </field>
     </record>
@@ -30,8 +30,10 @@
         <field name="arch" type="xml">
             <form string="Property">
                 <header>
-                    <button name="action_sold" type="object" string="Sold" class="btn-primary"/>
-                    <button name="action_cancel" type="object" string="Cancel"/>
+                    <button name="action_sold" type="object" string="Sold" class="btn-primary" 
+                            invisible="state in ('sold', 'canceled')"/>
+                    <button name="action_cancel" type="object" string="Cancel" 
+                            invisible="state in ('sold', 'canceled')"/>
                     <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
                 <sheet>
@@ -43,7 +45,7 @@
                     </div>
                     <group>
                         <group string="Location &amp; Availability">
-                            <field name="property_type_id" options="{'no_create': True}"/>
+                            <field name="property_type_id" options="{'no_create': True, 'no_open': True}"/>
                             <field name="postcode"/>
                             <field name="date_availability" string="Available From"/>
                             <field name="active" widget="boolean_toggle"/>
@@ -73,15 +75,15 @@
                             </group>
                         </page>
                         <page string="Offers" name="offers">
-                            <field name="offer_ids">
-                                <list string="Property Offers" editable="bottom">
-                                    <field name="price"/>
-                                    <field name="partner_id"/>
-                                    <field name="validity"/>
-                                    <field name="date_deadline"/>
-                                    <button name="action_accept" type="object" icon="fa-check" title="Accept Offer"/>
-                                    <button name="action_refuse" type="object" icon="fa-times" title="Refuse Offer"/>
-                                    <field name="status"/>
+                            <field name="offer_ids" readonly="state in ('offer_accepted', 'sold', 'canceled')">
+                                <list editable="bottom" decoration-danger="status == 'refused'" decoration-success="status == 'accepted'">
+                                    <field name="price" width="120px"/>
+                                    <field name="partner_id" width="200px"/>
+                                    <field name="validity" width="120px"/>
+                                    <field name="date_deadline" width="120px"/>
+                                    <field name="status" column_invisible="1"/>
+                                    <button name="action_accept" string="Accept" type="object" class="btn-success" invisible="status"/>
+                                    <button name="action_refuse" string="Refuse" type="object" class="btn-danger" invisible="status"/>
                                 </list>
                             </field>
                         </page>
@@ -107,7 +109,7 @@
                 <field name="postcode"/>
                 <field name="expected_price"/>
                 <field name="bedrooms"/>
-                <field name="living_area"/>
+                <field name="living_area" filter_domain="[('living_area', '>=', self)]"/>
                 <field name="facades"/>
                 <field name="property_type_id"/>
                 <separator/>
