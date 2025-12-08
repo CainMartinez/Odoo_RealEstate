@@ -45,7 +45,23 @@ class EstatePropertyOffer(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        """Override create to set property state to offer_received"""
+        """Override create to set property state to offer_received and validate offer price"""
+        # Validate offer prices before creation
+        for vals in vals_list:
+            property_id = vals.get('property_id')
+            if property_id:
+                property_obj = self.env['estate.property'].browse(property_id)
+                offer_price = vals.get('price', 0)
+                # Check if there are existing offers with higher prices
+                existing_offers = property_obj.offer_ids
+                if existing_offers:
+                    max_offer = max(existing_offers.mapped('price'))
+                    if offer_price <= max_offer:
+                        raise UserError(
+                            "The offer price (%.2f) must be higher than the existing offers (%.2f)." % 
+                            (offer_price, max_offer)
+                        )
+        
         offers = super().create(vals_list)
         for offer in offers:
             if offer.property_id.state == 'new':

@@ -107,6 +107,13 @@ class EstateProperty(models.Model):
             record.state = 'sold'
         return True
 
+    @api.ondelete(at_uninstall=False)
+    def _check_property_state_before_delete(self):
+        """Prevent deletion of properties that are not new or cancelled"""
+        for record in self:
+            if record.state not in ('new', 'canceled'):
+                raise UserError("Only new and cancelled properties can be deleted.")
+
     @api.constrains('expected_price')
     def _check_expected_price(self):
         """Validate that expected price is strictly positive"""
