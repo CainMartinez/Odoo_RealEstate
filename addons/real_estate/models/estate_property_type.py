@@ -1,22 +1,28 @@
+# -*- coding: utf-8 -*-
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
+
 from odoo import api, fields, models
 
 
 class EstatePropertyType(models.Model):
+    # Private attributes
     _name = 'estate.property.type'
     _description = 'Real Estate Property Type'
     _order = 'sequence, name'
 
-    # SQL constraints
-    _sql_constraints = [
-        ('unique_property_type_name', 'UNIQUE(name)', 'The property type name must be unique.'),
-    ]
-
+    # Fields
     name = fields.Char(string='Type', required=True)
     sequence = fields.Integer(string='Sequence', default=10)
     property_ids = fields.One2many('estate.property', 'property_type_id', string='Properties')
     offer_ids = fields.One2many('estate.property.offer', 'property_type_id', string='Offers')
     offer_count = fields.Integer(string='Offer Count', compute='_compute_offer_count')
 
+    # SQL constraints
+    _sql_constraints = [
+        ('unique_property_type_name', 'UNIQUE(name)', 'The property type name must be unique.'),
+    ]
+
+    # Compute methods
     @api.depends('offer_ids')
     def _compute_offer_count(self):
         """Compute the number of offers for this property type"""
