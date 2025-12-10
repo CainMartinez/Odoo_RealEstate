@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Real Estate Account',
-    'version': '19.0.1.0.0',
+    'version': '16.0.1.0.0',
     'summary': 'Real Estate Accounting Integration',
     'description': """
         Real Estate Account Module
