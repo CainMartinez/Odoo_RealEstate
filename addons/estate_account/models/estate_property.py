@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import models
+from odoo import Command, models
 
 
 class EstateProperty(models.Model):
@@ -20,12 +20,12 @@ class EstateProperty(models.Model):
                 'partner_id': prop.buyer_id.id,
                 'move_type': 'out_invoice',
                 'invoice_line_ids': [
-                    (0, 0, {
+                    Command.create({
                         'name': 'Property Sale - %s' % prop.name,
                         'quantity': 1,
                         'price_unit': prop.selling_price * 0.06,
                     }),
-                    (0, 0, {
+                    Command.create({
                         'name': 'Administrative Fees',
                         'quantity': 1,
                         'price_unit': 100.00,
