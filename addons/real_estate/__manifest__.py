@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Real Estate',
-    'version': '16.0.1.0.0',
+    'version': '19.0.1.0.0',
     'summary': 'Real Estate Management',
     'description': """
         Real Estate Module
@@ -24,8 +24,12 @@
         'views/estate_property_kanban_views.xml',
         'views/res_users_views.xml',
         'views/estate_menus.xml',
-        'views/assets.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'real_estate/static/src/css/estate.css',
+        ],
+    },
     'installable': True,
     'application': True,
     'auto_install': False,
